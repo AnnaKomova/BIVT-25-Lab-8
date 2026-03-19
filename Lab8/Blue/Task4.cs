@@ -151,41 +151,41 @@ namespace Lab8.Blue
                     }
                 }
             }
-
             public static Group Merge(Group group1, Group group2, int size)
             {
                 Group result = new Group("Финалисты");
+
                 int teamCount = size / 2;
+
                 group1.Sort();
                 group2.Sort();
 
-                Group resultMan = new Group("");
-                Group resultWoman = new Group("");
+                MergeTeams(ref result._manTeams, ref result._manCount, group1._manTeams, group2._manTeams, group1._manCount, group2._manCount, teamCount);
 
-                for (int i = 0; i < group1._manCount; i++)
-                    resultMan.Add(group1._manTeams[i]);
-                for (int i = 0; i < group1._womanCount; i++)
-                    resultWoman.Add(group1._womanTeams[i]);
-
-                for (int i = 0; i < group2._manCount; i++)
-                    resultMan.Add(group2._manTeams[i]);
-                for (int i = 0; i < group2._womanCount; i++)
-                    resultWoman.Add(group2._womanTeams[i]);
-
-                resultMan.Sort();
-                resultWoman.Sort();
-
-                for (int i = 0; i < teamCount; i++)
-                {
-                    result.Add(resultMan._manTeams[i]);
-                    result.Add(resultWoman._womanTeams[i]);
-                }
+                MergeTeams(ref result._womanTeams, ref result._womanCount, group1._womanTeams, group2._womanTeams, group1._womanCount, group2._womanCount, teamCount);
                 result.Sort();
                 return result;
+            }
+            private static void MergeTeams(ref Team[] result, ref int resultCount, Team[] groupTeams1, Team[] groupTeams2, int count1, int count2, int сount)
+            {
+
+                for (int i = 0; i < сount && i < count1; i++)
+                {
+                    result[resultCount] = groupTeams1[i];
+                    resultCount++;
+                }
+
+
+                for (int i = 0; i < сount && i < count2; i++)
+                {
+                    result[resultCount] = groupTeams2[i];
+                    resultCount++;
+                }
             }
 
             public void Print()
             {
+                
                 return;
             }
         }
